@@ -16,5 +16,6 @@ int main () {
 
 	cout << "Maximum value in unsigned binary = " << pow (2, n)-1 << endl;
 	result = pow (2, n)-1;
+
 	return 0;
 }
