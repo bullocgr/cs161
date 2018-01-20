@@ -5,25 +5,19 @@ using namespace std;
 
 int main () {
 
-	int result = 0;
-	int n;
-	cout << "Enter a number less than 9." << endl;
-	cin >> n;
-	cout << "Max amount of numbers in unsigned binary = " << pow (2, n) << endl;
-	result = (2, n); 
-	cout << "Max number in unsigned = " << UINT_MAX + 1 <<endl;
-	result << UINT_MAX+1;
+	int number_bytes = 8;
+	long number_bits = 8*(number_bytes); 
 
-	cout << "Max amount of numbers in signed binary = " << pow (2, (n-1)) << endl;
-	result = (2, (n-1));
-//	cout << "Max number in signed = " << INT_MAX + 1 << endl;
-//	result << INT_MAX + 1;
+	long result;
 	
-	cout << "Maximum value in unsigned binary = " << pow (2, n)-1 << endl;
-	result = pow (2, n)-1;
+	cout << "Maximum value in unsigned binary = " << pow (2, number_bits)-1 << endl;
+	result = pow (2, number_bits)-1;
+	cout << "Minimum number for unsigned binary = " << 0 << endl;
 	
-	cout << "Maximum value in signed binary = " << pow (2, n-1)-1 << endl;
-	result = pow (2, n-1)-1;
+	cout << "Maximum value in signed binary = " << pow (2, number_bits-1)-1 << endl;
+	result = pow (2, number_bits-1)-1;
+	cout << "Minimum value in signed binary = " << -1*(pow (2, number_bits-1)-1) << endl;
+	result = -1*(pow (2, number_bits-1)-1);
 
 	return 0;
 }
