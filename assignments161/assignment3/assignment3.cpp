@@ -7,7 +7,7 @@ bool isEven(int n)
     if(n%2 == 0)
         return true;
     else
-        return false; 
+        return false;
 }
 
 int main()
@@ -22,4 +22,5 @@ int main()
         cout << "False." << endl;
 
     return 0;
+    
 }
