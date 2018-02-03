@@ -284,58 +284,89 @@ int main () {
 
       else
         cout << fail << endl;
-      cout << endl;
 
     printf("Test 2: lower_bound = %d upper_bound = %d test_value = %d \n", lb, ub, incorrect);
     cout << "Test 2:";
     if(!check_range_false)
-      cout << pass << endl;
+      cout << fail << endl;
     //this is saying "if not true, return a pass"
 
     else
-      cout << fail << endl;
+      cout << pass << endl;
     cout << endl;
 
    //IS INT
     cout << "is_int:" << endl;
-    int test1 = 1234;
-    int test2 = 1.4;
+    string test1 = "1234";
+    string test2 = "1.4";
     bool is_int_true = is_int(test1);
     bool is_int_false = is_int(test2);
-    printf ("Test 1: correct_int = %d \n", test1);
+    printf ("Test 1: correct_int = %s \n", test1.c_str());
     cout << "Test 1:";
     if(is_int_true)
       cout << pass << endl;
 
     else 
       cout << fail << endl;
-    cout << endl;
 
-   printf("Test 2: incorrect_int = %d \n", test2);
+   printf("Test 2: incorrect_int = %s \n", test2.c_str());
    cout << "Test 2:";
     if(!is_int_false)
+      cout << fail << endl;
+
+    else 
+      cout << pass << endl;
+    cout << endl;
+
+   //IS FLOAT
+    cout << "is_float:" << endl;
+    cout << "Test 1: 3.456" << endl;
+    if(is_float("3.456"))
+      cout << pass << endl;
+
+    else
+      cout << fail << endl; 
+
+    cout << "Test 2: hello" << endl;
+    if(is_float("hello")) 
+      cout << pass << endl;
+
+    else
+      cout << fail << endl;
+    cout << endl;
+
+//IS CAPITAL
+    cout << "is_capital:" << endl;
+    cout << "Test 1: A" << endl;
+    if(is_capital('A'))
       cout << pass << endl;
 
     else 
       cout << fail << endl;
 
-    cout << "is_float:" << endl;
-    cout << is_float("3.456") << endl;
-    cout << is_float("hello") << endl;
-    cout << is_float("123") <<endl;
+    cout << "Test 2: b" << endl;
+    if(is_capital('b'))
+      cout << pass << endl;
+
+    else 
+      cout << fail << endl;
     cout << endl;
 
-    cout << "is_capital:" << endl;
-    cout << is_capital('A') << endl;
-    cout << is_capital('b') << endl;
-    cout << is_capital('3') << endl;
-    cout << endl;
-
+//IS EVEN
     cout << "is_even:" << endl;
-    cout << is_even(2) << endl;
-    cout << is_even(48) << endl;
-    cout << is_even(103) << endl;
-    cout << is_even(0) << endl;
+    cout << "Test 1: 2" << endl;
+    if(is_even(2))
+      cout << pass << endl;
+
+    else 
+      cout << fail << endl;
+
+    cout << "Test 2: 103" << endl;
+    if(is_even(103))
+      cout << pass << endl;
+
+    else
+      cout << fail << endl;
     cout << endl;
 
     cout << "is_odd:" << endl;
