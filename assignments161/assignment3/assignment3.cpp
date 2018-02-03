@@ -369,17 +369,38 @@ int main () {
       cout << fail << endl;
     cout << endl;
 
+//IS ODD
     cout << "is_odd:" << endl;
-    cout << is_odd(1) << endl;
-    cout << is_odd(3939) << endl;
-    cout << is_odd(12) << endl;
-    cout << is_odd(0) << endl;
+    cout << "Test 1: 1" << endl;
+    if(is_odd(1)) 
+      cout << pass << endl;
+
+    else
+      cout << fail << endl;
+
+    cout << "Test 2: 1290490" << endl;
+      if(is_odd(1290490))
+        cout << pass << endl;
+
+      else 
+        cout << fail << endl;
     cout << endl;
 
+//EQUALITY TEST
     cout << "equality_test:" << endl;
-    cout << equality_test(1, 1) << endl;
-    cout << equality_test(2, 1) << endl;
-    cout << equality_test(1, 2) << endl;
+    cout << "Test 1: 1, 1" << endl;
+    if(equality_test(1, 1)) 
+      cout << pass << endl;
+
+    else 
+      cout << fail << endl;
+
+    cout << "Test 2: 2, 1" << endl;
+    if(equality_test(2, 1)) 
+      cout << pass << endl;
+
+    else 
+      cout << fail << endl;
     cout << endl;
 
     cout << "float_is_equal:" << endl;
