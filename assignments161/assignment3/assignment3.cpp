@@ -1,8 +1,10 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
-#include <string.h>
+#include <string>
 #include <cstdlib>
+#include <cmath>
+#include <stdio.h>
 using namespace std;
 
 /*Function: check_range
@@ -15,10 +17,10 @@ Post-conditions: return a bool
 bool check_range(int lower_bound, int upper_bound, int test_value) {
   for(int i=0; i >= lower_bound && i <= upper_bound; i++) {
     if(test_value >= lower_bound && test_value <= upper_bound)
-      return false;
+      return true;
   }
 
-  return true;
+  return false;
 
 }
 
@@ -64,7 +66,7 @@ Post: output is a bool
 */
 
 bool is_capital(char capital) {
-  if(((int)capital < 65) || ((int)capital > 90)){
+  if((capital < 65) || (capital > 90)){
     return false;
   }
   return true;
@@ -119,7 +121,7 @@ int equality_test(int num1, int num2) {
     return 0;
   }
 
-  else { 
+  else {
     return 1;
   }
 
@@ -133,7 +135,7 @@ Post: output is a bool
 */
 
 bool float_is_equal(float num1, float num2, float precision) {
-  if(num1-num2 < precision)
+  if(abs(num1-num2) < precision)
     return true;
 
   else {
@@ -151,12 +153,12 @@ Post: output is a bool
 
 bool numbers_present(string sentence) {
   for(int i = 0; i < sentence.length(); i++) {
-    if(((int) sentence[i] >= 48) && ((int) sentence[i] <= 57))
-      return true; 
+    if((sentence[i] >= 48) && (sentence[i] <= 57))
+      return true;
   }
 
     return false;
-  
+
 }
 
 /*Function: letters_present
@@ -168,12 +170,37 @@ Post: output is a bool
 
 bool letters_present(string sentence) {
   for (int i = 0; i < sentence.length(); i++) {
-    if (((int) sentence[i] >= 97) && ((int) sentence[i] <= 122) || ((int) sentence[i] >= 65) && ((int) sentence[i] <= 90))
+    if ((sentence[i] >= 97) && (sentence[i] <= 122) || (sentence[i] >= 65) && (sentence[i] <= 90))
       return true;
   }
 
   return false;
 
+}
+
+/*Function: contains_sub_string
+Description: says if substring is in a sentence
+Parameters: sentence and substring and bool
+Pre: input is two strings
+Post: output is a bool
+*/
+
+bool contains_sub_string(string sentence, string substring) {
+  for(int i=0; i < sentence.length(); i++) {
+    int i2 = 0;
+    if (sentence[i] == substring[i2]) {
+      while(sentence[i] == substring[i2] && i2 < substring.length()) {
+        i++;
+        i2++;
+      }
+      if (i2 == substring.length()) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+  }
 }
 
 /*Function: word_count
@@ -193,26 +220,111 @@ int word_count(string sentence) {
   return value;
 }
 
+/*Function: to_upper
+Description: capitalize all letters in a string to capital and leave all non letter characters the same
+Parameters: string and string
+Pre: input is a string
+Post: output is a string
+*/
+
+string to_upper(string sentence) {
+  for(int i=0; i < sentence.length(); i++) {
+    if((sentence[i] > 96) && (sentence[i] < 123))
+      sentence[i] = sentence[i] - 32;
+    }
+
+    return sentence;
+
+}
+
+/*Function: to_lower
+Description: make all uppercase letters lowercase
+Parameters: string and string
+Pre: input is a string
+Post: output is a string
+*/
+
+string to_lower(string sentence) {
+  for(int i=0; i < sentence.length(); i++) {
+    if((sentence[i] > 64) && (sentence[i] < 91))
+      sentence [i] = sentence[i] + 32;
+  }
+
+  return sentence;
+
+}
+
+/*Function: get_int
+Description: take user input until they give you a valid int then return their int Input
+Parameters: string and int
+Pre: string
+Post: int
+*/
+
+int get_int(string integer) {
+ 
+ }
 
 int main () {
+  const string pass = "PASS";
+  const string fail = "FAIL";
 
+   //CHECK RANGE
     cout << "check_range:" << endl;
-    cout << check_range(0, 98, 64) << endl;
-    cout << check_range(4, 1, 90) << endl;
+    int lb = 0;
+    int ub = 98;
+    int correct_test = 64;
+    int incorrect = 100;
+    bool check_range_true = check_range(lb, ub, correct_test);
+    bool check_range_false = check_range(lb, ub, incorrect);
+    printf ("Test 1: lower_bound = %d upper_bound = %d test_value = %d \n", lb, ub, correct_test);
+    cout << "Test 1:";
+    if (check_range_true)
+        cout << pass << endl;
+
+      else
+        cout << fail << endl;
+      cout << endl;
+
+    printf("Test 2: lower_bound = %d upper_bound = %d test_value = %d \n", lb, ub, incorrect);
+    cout << "Test 2:";
+    if(!check_range_false)
+      cout << pass << endl;
+    //this is saying "if not true, return a pass"
+
+    else
+      cout << fail << endl;
     cout << endl;
 
+   //IS INT
     cout << "is_int:" << endl;
-    cout << is_int("1234") << endl;
-    cout << is_int("1.4.3") << endl;
-    cout << is_int("hello") << endl;
+    int test1 = 1234;
+    int test2 = 1.4;
+    bool is_int_true = is_int(test1);
+    bool is_int_false = is_int(test2);
+    printf ("Test 1: correct_int = %d \n", test1);
+    cout << "Test 1:";
+    if(is_int_true)
+      cout << pass << endl;
+
+    else 
+      cout << fail << endl;
     cout << endl;
+
+   printf("Test 2: incorrect_int = %d \n", test2);
+   cout << "Test 2:";
+    if(!is_int_false)
+      cout << pass << endl;
+
+    else 
+      cout << fail << endl;
 
     cout << "is_float:" << endl;
     cout << is_float("3.456") << endl;
     cout << is_float("hello") << endl;
     cout << is_float("123") <<endl;
     cout << endl;
-    
+
     cout << "is_capital:" << endl;
     cout << is_capital('A') << endl;
     cout << is_capital('b') << endl;
@@ -260,6 +372,27 @@ int main () {
     cout << word_count("i enjoy cs") << endl;
     cout << word_count("i like to eat ass") << endl;
     cout << endl;
+
+    cout << "to_upper:" << endl;
+    cout << to_upper("hello") << endl;
+    cout << to_upper("23ab") << endl;
+    cout << to_upper("my name is grace") << endl;
+    cout << endl;
+
+    cout << "to_lower:" << endl;
+    cout << "Test 1: HELLO" << endl;
+    cout << to_lower("HELLO") << endl;
+    cout << "Test 2: I AM 3 YEARS OLD" << endl;
+    cout << to_lower("I AM 3 YEARS OLD") << endl;
+    cout << endl;
+
+    cout << "contains_sub_string:" << endl;
+    cout << "Test 1: animals are cute, animals" << endl;
+    cout << contains_sub_string("animals are cute", "animals") << endl;
+    cout << "Test 2: animals are cute, dogs" << endl;
+    cout << contains_sub_string("animals are cute", "dogs") << endl;
+    cout << endl;
+
 
     return 0;
 }
