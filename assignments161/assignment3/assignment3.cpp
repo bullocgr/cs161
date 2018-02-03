@@ -262,7 +262,7 @@ Post: int
 */
 
 int get_int(string integer) {
- 
+
  }
 
 int main () {
@@ -306,7 +306,7 @@ int main () {
     if(is_int_true)
       cout << pass << endl;
 
-    else 
+    else
       cout << fail << endl;
 
    printf("Test 2: incorrect_int = %s \n", test2.c_str());
@@ -314,7 +314,7 @@ int main () {
     if(!is_int_false)
       cout << fail << endl;
 
-    else 
+    else
       cout << pass << endl;
     cout << endl;
 
@@ -325,10 +325,10 @@ int main () {
       cout << pass << endl;
 
     else
-      cout << fail << endl; 
+      cout << fail << endl;
 
     cout << "Test 2: hello" << endl;
-    if(is_float("hello")) 
+    if(is_float("hello"))
       cout << pass << endl;
 
     else
@@ -341,14 +341,14 @@ int main () {
     if(is_capital('A'))
       cout << pass << endl;
 
-    else 
+    else
       cout << fail << endl;
 
     cout << "Test 2: b" << endl;
     if(is_capital('b'))
       cout << pass << endl;
 
-    else 
+    else
       cout << fail << endl;
     cout << endl;
 
@@ -358,7 +358,7 @@ int main () {
     if(is_even(2))
       cout << pass << endl;
 
-    else 
+    else
       cout << fail << endl;
 
     cout << "Test 2: 103" << endl;
@@ -372,7 +372,7 @@ int main () {
 //IS ODD
     cout << "is_odd:" << endl;
     cout << "Test 1: 1" << endl;
-    if(is_odd(1)) 
+    if(is_odd(1))
       cout << pass << endl;
 
     else
@@ -382,55 +382,93 @@ int main () {
       if(is_odd(1290490))
         cout << pass << endl;
 
-      else 
+      else
         cout << fail << endl;
     cout << endl;
 
 //EQUALITY TEST
     cout << "equality_test:" << endl;
-    cout << "Test 1: 1, 1" << endl;
-    if(equality_test(1, 1)) 
-      cout << pass << endl;
+    cout << "Test 1: 1, 9" << endl;
+    cout << equality_test(1, 9) << endl;
 
-    else 
-      cout << fail << endl;
+    cout << "Test 2: 1, 1" << endl;
+    cout << equality_test(1, 1) << endl;
 
-    cout << "Test 2: 2, 1" << endl;
-    if(equality_test(2, 1)) 
-      cout << pass << endl;
-
-    else 
-      cout << fail << endl;
+    cout << "Test 3: 4, 1" << endl;
+    cout << equality_test(4, 1) << endl;
     cout << endl;
 
+
+//FLOAT IS EQUAL
     cout << "float_is_equal:" << endl;
-    cout << float_is_equal(1.02, 1.01, 0.01) << endl;
-    cout << float_is_equal(5.0, 4.01, 0.01 ) << endl;
+    cout << "Test 1: 1.02, 1.01, 0.01" << endl;
+    if(float_is_equal(1.02, 1.01, 0.01))
+      cout << pass << endl;
+
+    else
+    cout << fail << endl;
+
+    cout << "Test 2: 5.0, 3.01, 1.1 " << endl;
+    if(float_is_equal(5.0, 3.01, 1.1))
+      cout << pass << endl;
+
+    else
+      cout << fail << endl;
     cout << endl;
 
+//NUMBERS PRESENT
     cout << "numbers_present:" << endl;
-    cout << numbers_present("913") << endl;
-    cout << numbers_present("a9n") << endl;
-    cout << numbers_present("hello") << endl;
+    cout << "Test 1: a93" << endl;
+    if(numbers_present("a93"))
+      cout << pass << endl;
+
+    else
+      cout << fail << endl;
+
+    cout << "Test 2: hello" << endl;
+    if(numbers_present("hello"))
+      cout << pass << endl;
+
+    else
+      cout << fail << endl;
     cout << endl;
 
+//LETTERS PRESENT
     cout << "letters_present:" << endl;
-    cout << letters_present("3904m") << endl;
-    cout << letters_present("hello") << endl;
-    cout << letters_present("37.84") << endl;
+    cout << "Test 1: hello879" << endl;
+    if(letters_present("hello879"))
+      cout << pass << endl;
 
+    else
+      cout << fail << endl;
+
+    cout << "Test 2: 37.84" << endl;
+    if(letters_present("37.84")) 
+      cout << pass << endl;
+
+    else
+      cout << fail << endl;
+    cout << endl;
+
+//WORD COUNT
     cout << "word_count: " << endl;
-    cout << word_count("hello") << endl;
-    cout << word_count("i enjoy cs") << endl;
-    cout << word_count("i like to eat ass") << endl;
+    cout << "Test 1: hello" << endl;
+    cout <<(word_count("hello")) << endl;
+
+    cout << "Test 2: I enjoy cs" << endl;
+    cout << (word_count("I enjoy cs")) << endl;
     cout << endl;
 
+//TO UPPER
     cout << "to_upper:" << endl;
+    cout << "Test 1: hello" << endl;
     cout << to_upper("hello") << endl;
+
+    cout << "Test 2: 23ab" << endl;
     cout << to_upper("23ab") << endl;
-    cout << to_upper("my name is grace") << endl;
     cout << endl;
 
+//TO LOWER
     cout << "to_lower:" << endl;
     cout << "Test 1: HELLO" << endl;
     cout << to_lower("HELLO") << endl;
@@ -438,11 +476,21 @@ int main () {
     cout << to_lower("I AM 3 YEARS OLD") << endl;
     cout << endl;
 
+//CONTAINS SUBSTRING
     cout << "contains_sub_string:" << endl;
     cout << "Test 1: animals are cute, animals" << endl;
-    cout << contains_sub_string("animals are cute", "animals") << endl;
+    if(contains_sub_string("animals are cute", "animals"))
+      cout << pass << endl;
+
+    else 
+      cout << fail << endl;
+
     cout << "Test 2: animals are cute, dogs" << endl;
-    cout << contains_sub_string("animals are cute", "dogs") << endl;
+    if(contains_sub_string("animals are cute", "dogs"))
+      cout << pass << endl;
+
+    else 
+      cout << fail << endl;
     cout << endl;
 
 
