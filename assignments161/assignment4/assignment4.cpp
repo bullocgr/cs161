@@ -83,18 +83,22 @@ int grading(int num) {
 	cout << average << endl;
 
 	float weight;
+	char answer;
 	
-	cout << "Would you like to add a weight to the average?" << endl;
+	cout << "Would you like to weight the average (y/n)?" << endl;
 	cin >> answer;
 
-	switch(num) {
-		case "yes":
+	switch(answer) {
+		case 'y':
 		cout << "Weight: ";
+		cin >> weight;
 		average *= weight;
-		cout << "The new average is: " << average << endl;
+		cout << "The weight is: " << average << endl;
+		break;
 
-		case "no":
+		case 'n':
 		cout << "Your final average is: " << average << endl;
+		break;
 	}
 }
 
