@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <cstring>
 using namespace std;
 
 
@@ -22,26 +23,66 @@ using namespace std;
 /*Function: Convert binary to decimal
 */
 
-int bi_to_de(long num) {
-	long base = 1, value = 0;
-	cout << "Enter the binary number you want to convert to decimal: ";
-	cin >> num;
-	do{
-		if (num > 0)
-			break;
-		cout << "Please re-enter a valid input: ";
-		cin >> num;
-	} while (num);
-	
-	while(num > 0) {
-		int last = num % 10;
-		num = num / 10;
-		value += last * base;
-		base = base * 2;
+bool binary(string bi) {
+	int i = 0;
+	if ((bi[i] == 0) || (bi[i] == 1)){
+		return true;
 	}
+
+		return false;
+
+}
+
+//loop it to see if each value is 1 or 0
+
+int bi_to_de() {
+	int value = 0, base = 1;
+	string bi = "";
+	cout << "Please enter a binary number: ";
+	cin >> bi;
+
+	// do {
+	// 	if(binary(bi) == true)
+	// 		break;
+	// 	cout << "Please enter a valid input: ";
+	// 	cin >> bi;
+	// } while(true);
+
+	int i = bi.length()-1;
+	
+	for(i; i >= 0; i--) {
+		int last = bi[i];
+		value += last * base;
+		base *= 2;
+	}
+	//first line jumps to the last character in a loop
+	//adds 0 and sets that equal to the last value *1
+	//multiplies base by *2
+	// then decrements i to go to all the way to the 0 value of the string
 
 	return value;
 }
+
+// int bi_to_de(long num) {
+// 	long base = 1, value = 0;
+// 	cout << "Enter the binary number you want to convert to decimal: ";
+// 	cin >> num;
+// 	do{
+// 		if (num > 0)
+// 			break;
+// 		cout << "Please re-enter a valid input: ";
+// 		cin >> num;
+// 	} while (num);
+	
+// 	while(num > 0) {
+// 		int last = num % 10;
+// 		num = num / 10;
+// 		value += last * base;
+// 		base = base * 2;
+// 	}
+
+// 	return value;
+// }
 // DO ERROR HANDLING IN THIS
 // go through each number in the int and %2 it, and if there's a remainder then it is not a valid input
 // how do i do this
@@ -66,7 +107,7 @@ long de_to_bi(int num) {
 
 // need error handling
 
-int grading(int num) {
+float grading(int num) {
 	int sum = 0, average, test;
 	cout << "Enter how many tests you are taking the average of: ";
 	cin >> test;
@@ -102,11 +143,17 @@ int grading(int num) {
 	}
 }
 
+// string welcome(int function) {
+	
+// }
+
 
 
 
 int main(){
-	int num, function;
+	int function;
+	int num;
+	string input;
 	cout << "Choose which calculation you would like to be done:\n1) Regular calculations\n2) Binary to decimal conversions\n3) Decimal to binary conversions\n4) Grading calculator" << endl;
 	cin >> function;
 
@@ -115,7 +162,7 @@ int main(){
 	// }
 
 	if(function == 2) {
-		cout << bi_to_de(num) << endl;
+		cout << bi_to_de() << endl;
 	}
 
 	if(function == 3) {
