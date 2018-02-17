@@ -1,88 +1,101 @@
 #include <iostream>
 #include <cmath>
 #include <cstring>
+#include <cstdlib>
 using namespace std;
 
 
 // string calculation;
 // int num1, num2;
 
-// string switch(calculation){
-// 	cout << "Input what you want calculated: ";
-// 	cin >> num;
-// 		case '+':
-// 		num += num;
-// 		break;
-
-// 		case '-':
-// 		num -= num;
-// 		break;
-
-// 	}
+string calculator(string input){
+	int total = 0, num;
+	char op = '+' || '-' || '/' || '*';
+	cout << "Input what you want calculated: ";
+	cin >> input;
+	for(int i = 0; i < input.length(); i++) {
+		if(input[i] == op)
+			break;
+	}
+	switch(op){
+		case '+':
+		for(int i = 0; i < input.length(); i++){
+			cout << input.at(i) << endl;
+			num = input.at(i) - '0';
+			cout << num << endl;
+			total += num;
+		}
+	}
+	
+}
 
 /*Function: Convert binary to decimal
 */
 
-bool binary(string bi) {
-	int i = 0;
-	if ((bi[i] == 0) || (bi[i] == 1)){
-		return true;
-	}
-
-		return false;
-
-}
-
 //loop it to see if each value is 1 or 0
 
-int bi_to_de() {
-	int value = 0, base = 1;
-	string bi = "";
-	cout << "Please enter a binary number: ";
-	cin >> bi;
+// int bi_to_de() {
+// 	int value = 0, base = 1;
+// 	string bi = "";
+// 	cout << "Please enter a binary number: ";
+// 	cin >> bi;
 
-	// do {
-	// 	if(binary(bi) == true)
-	// 		break;
-	// 	cout << "Please enter a valid input: ";
-	// 	cin >> bi;
-	// } while(true);
+// 	do {
+// 		if(binary(bi) == true)
+// 			break;
+// 		cout << "Please enter a valid input: ";
+// 		cin >> bi;
+// 	} while(true);
 
-	int i = bi.length()-1;
+// 	int i = bi.length()-1;
 	
-	for(i; i >= 0; i--) {
-		int last = bi[i];
-		value += last * base;
-		base *= 2;
-	}
+// 	for(i; i >= 0; i--) {
+// 		int last = bi[i];
+// 		value += last * base;
+// 		base *= 2;
+// 	}
 	//first line jumps to the last character in a loop
 	//adds 0 and sets that equal to the last value *1
 	//multiplies base by *2
 	// then decrements i to go to all the way to the 0 value of the string
 
-	return value;
-}
-
-// int bi_to_de(long num) {
-// 	long base = 1, value = 0;
-// 	cout << "Enter the binary number you want to convert to decimal: ";
-// 	cin >> num;
-// 	do{
-// 		if (num > 0)
-// 			break;
-// 		cout << "Please re-enter a valid input: ";
-// 		cin >> num;
-// 	} while (num);
-	
-// 	while(num > 0) {
-// 		int last = num % 10;
-// 		num = num / 10;
-// 		value += last * base;
-// 		base = base * 2;
-// 	}
-
 // 	return value;
 // }
+
+bool binary(long num) {
+	int bi = num % 10;
+	do{
+		if(bi > 1){
+			return false;
+		}
+		num /= 10;
+		bi = num % 10;
+	}while(bi > 0);
+
+		return true;
+}
+
+int bi_to_de(long num) {
+	long base = 1, value = 0;
+
+	cout << "Enter the binary number you want to convert: ";
+	cin >> num;
+	binary(num);
+	
+	while(binary(num) == false) {
+		cout << "Re-enter a valid binary number: ";
+		cin >> num;
+	}
+	
+	while(num) {
+		int last = num % 10;
+		num = num / 10;
+		value += last * base;
+		base = base * 2;
+	}
+
+	return value;
+}
 // DO ERROR HANDLING IN THIS
 // go through each number in the int and %2 it, and if there's a remainder then it is not a valid input
 // how do i do this
@@ -143,26 +156,19 @@ float grading(int num) {
 	}
 }
 
-// string welcome(int function) {
-	
-// }
-
-
-
-
-int main(){
-	int function;
-	int num;
+string welcome(int function) {
+	long num;
 	string input;
+
 	cout << "Choose which calculation you would like to be done:\n1) Regular calculations\n2) Binary to decimal conversions\n3) Decimal to binary conversions\n4) Grading calculator" << endl;
 	cin >> function;
 
-	// if(function == 1) {
-	// 	cout << calculator() << endl;
-	// }
+	if(function == 1) {
+		cout << calculator("input") << endl;
+	}
 
 	if(function == 2) {
-		cout << bi_to_de() << endl;
+		cout << bi_to_de(num) << endl;
 	}
 
 	if(function == 3) {
@@ -172,6 +178,24 @@ int main(){
 	if(function == 4) {
 		cout << grading(num) << endl;
 	}
+	
+}
+
+
+
+
+int main(){
+
+	int function;
+	char input;
+	do{
+		welcome(function);
+		cout << "Continue computing (y/n): ";
+		cin >> input;
+	}while(input == 'y');
+
+	return 0;
+	
 }	
 
 	
