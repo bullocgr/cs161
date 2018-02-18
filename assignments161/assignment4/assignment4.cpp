@@ -8,25 +8,25 @@ using namespace std;
 // string calculation;
 // int num1, num2;
 
-string calculator(string input){
-	int total = 0, num;
-	char op = '+' || '-' || '/' || '*';
-	cout << "Input what you want calculated: ";
-	cin >> input;
-	for(int i = 0; i < input.length(); i++) {
-		if(input[i] == op)
-			break;
-	}
-	switch(op){
-		case '+':
-		for(int i = 0; i < input.length(); i++){
-			cout << input.at(i) << endl;
-			num = input.at(i) - '0';
-			cout << num << endl;
-			total += num;
+void calculator() {
+	float previous, current, total;
+	char op;
+	cout << "Enter what you want calulated: ";
+	cin >> previous;
+	current = 1;
+	while(current) {
+		cin >> op;
+		cout << op << endl;
+		cin >> current;
+		cout << current << endl;
+		switch(op){
+			case '+':
+				previous += current;
 		}
+		cout << previous << endl;
+
 	}
-	
+	cout << previous << endl;
 }
 
 /*Function: Convert binary to decimal
@@ -75,8 +75,8 @@ bool binary(long num) {
 		return true;
 }
 
-int bi_to_de(long num) {
-	long base = 1, value = 0;
+int bi_to_de() {
+	long base = 1, value = 0, num;
 
 	cout << "Enter the binary number you want to convert: ";
 	cin >> num;
@@ -156,7 +156,7 @@ float grading(int num) {
 	}
 }
 
-string welcome(int function) {
+void welcome(int function) {
 	long num;
 	string input;
 
@@ -164,11 +164,11 @@ string welcome(int function) {
 	cin >> function;
 
 	if(function == 1) {
-		cout << calculator("input") << endl;
+		calculator();
 	}
 
 	if(function == 2) {
-		cout << bi_to_de(num) << endl;
+		cout << bi_to_de() << endl;
 	}
 
 	if(function == 3) {
