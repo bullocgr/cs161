@@ -2,24 +2,31 @@
 using namespace std;
 
 void calculator() {
-	float previous, current, total;
-	char op;
-	cout << "Enter what you want calulated: ";
-	cin >> previous;
-	current = 1;
-	while(current) {
-		cin >> op;
-		cout << op << endl;
-		cin >> current;
-		cout << current << endl;
-		switch(op){
-			case '+':
-				previous += current;
-		}
-		cout << previous << endl;
+	string input = "";
+	// cout << "Enter what you want to calculate: ";
+	getline(cin, input);
 
+	for(int i = 0; i < input.length(); i++) {
+		if(input[i] == '.' || input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/' || input[i] >= '0' && input[i] <= '9' || input[i] == ' ') {
+			continue;
+		}
+
+	else{
+		cout << "Please enter a valid input: ";
+		break;
 	}
-	cout << previous << endl;
+}
+
+int original = 0, final = 1;
+bool num = false;
+
+for (int i = 0; i < input.length(); i++) {
+	if(input[i] == ' ' && num == false)
+		continue;
+}
+
+cout << "This function is out of order." << endl;
+
 }
 
 
@@ -51,7 +58,7 @@ Post-conditions: output will be an int
 */
 
 int bi_to_de() {
-	long base = 1, value = 0, num;
+	int base = 1, value = 0, num;
 
 	cout << "Enter the binary number you want to convert: ";
 	cin >> num;
@@ -72,40 +79,24 @@ int bi_to_de() {
 	return value;
 }
 
-/*Function: is_int
+/*Function: check_bin
 Description: take a string of numbers and test whether it's an integer, if it is return true
-Parameters: bool and int
-Pre-conditions: input is a string
-Post-conditions: output is a bool
+Parameters: int and int
+Pre-conditions: input is an int
+Post-conditions: output is an int
 */
 
-bool is_int(string num) {
-  for(int i=0; i < num.length(); i++) {
-    if((num[i] <= 48) || (num[i] >= 57))
-      return false;
+int check_bin(int num) {
+	for(int i = 0; i < num; i++) {
+		if (num == '.') {
+			cout << "Please re-enter a valid decimal number: ";
+			cin >> num;	
+		}
     }
 
-    return true;
-
+    return num;
 }
 
-/*Function: decimal
-Description: checks if a number is a decimal number. used for error handling
-Parameters: bool and int
-Pre-conditions: the input must be a string of numbers
-Post-conditions: output will be a bool
-*/
-
-bool decimal(long num) {
-	do{
-		if(num != '.')
-			break;
-		cout << "Please enter a valid binary number: ";
-		cin >> num;
-	} while(num == '.');
-
-	return 0;
-}
 
 /*Function: Convert decimal to binary
 Description: converts a decimal number to a binary number
@@ -119,7 +110,7 @@ int de_to_bi() {
 	long remainder, base = 1, binary = 0, num;
 	cout << "Enter the decimal number you want to convert to binary: ";
 	cin >> num;
-	decimal (num);
+	check_bin(num);
 
 	while(num >= 1) {
 		remainder = num % 2;
@@ -184,8 +175,6 @@ Post-conditions: output is nothing
 void welcome(int function) {
 	float num;
 	string input;
-
-  do {
 	   cout << "Choose which calculation you would like to be done:\n1) Regular calculations\n2) Binary to decimal conversions\n3) Decimal to binary conversions\n4) Grading calculator" << endl;
 	   cin >> function;
 
@@ -195,23 +184,21 @@ void welcome(int function) {
 	   			break;
 
 	  	 	case 2:
-	   			bi_to_de();
+	   			cout << bi_to_de() << endl;
 	   			break;
 	   		
 	  	 	case 3:
-	  	 		de_to_bi();
+	  	 		cout << de_to_bi() << endl;
 	   			break;
 
 	  	 	case 4: 
-			   	grading(num);
+			   	cout << grading(num) << endl;
 	   			break;
 
 	   		default:
 	   			function;
 	   			break;
 	   		}	
-
-	}while(function);
 
 }
 

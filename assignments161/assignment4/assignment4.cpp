@@ -17,9 +17,6 @@ int main(){
 		cin >> input;
 	}while(input == 'y');
 
-	if(input == 'n')
-		cout << "Thank you for using the calculator!" << endl;
-
 	return 0;
 	
 }	
