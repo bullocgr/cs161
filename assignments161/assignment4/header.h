@@ -1,14 +1,19 @@
 #include <iostream>
 #include <cmath>
-#include <cstring>
+#include <string>
 #include <cstdlib>
+#include <cmath> 
+#include <algorithm>
 using namespace std;
 
-void calculator();
-bool binary(long num);
-int bi_to_de();
 bool is_int(string num);
-bool decimal();
-int de_to_bi();
-float grading(float num);
-void welcome(int function);
+bool operate(char op);
+bool is_float(string fl);
+float get_float(string prompt);
+void calculator();
+string check_bin();
+void bi_to_de();
+int get_int(string prompt);
+void de_to_bi();
+void grading(float num);
+int welcome();

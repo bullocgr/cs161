@@ -8,16 +8,12 @@ using namespace std;
 
 
 int main(){
-
-	int function;
 	char input;
-	do{
-		welcome(function);
+	do {
+		cout << welcome() << endl;
 		cout << "Continue computing (y/n): ";
 		cin >> input;
 	}while(input == 'y');
-
-	return 0;
 	
 }	
 
