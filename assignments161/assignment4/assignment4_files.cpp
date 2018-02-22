@@ -226,7 +226,6 @@ void bi_to_de() {
 	for(int i = 0; i < input.length(); i++){
 		if (input[i] == '1')
 			de += pow(2, input.length());
-			str--;
 	}
 
 	cout << de << endl;
