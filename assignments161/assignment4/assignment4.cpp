@@ -10,7 +10,7 @@ using namespace std;
 int main(){
 	char input;
 	do {
-		cout << welcome() << endl;
+		welcome();
 		cout << "Continue computing (y/n): ";
 		cin >> input;
 	}while(input == 'y');
