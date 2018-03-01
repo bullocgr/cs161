@@ -117,7 +117,7 @@ int dice_out(int* dice_roll) {
 	do{
 		if(is_int(num) == true)
 			break;
-		cout << "Please input a number between 1 and 6: "; //bounds error in this error handling
+		cout << "Please input a number between 1 and 6: ";
 		getline(cin, num);
 		}while(true);
 
@@ -131,7 +131,7 @@ int dice_out(int* dice_roll) {
 		if(is_int(save) == true)
 			break;
 		cout << "Please input a number between 1 and 6: "; //bounds error in this error handling
-		getline(cin, save);								// make it so that you can choose which index to move not which numbers
+		getline(cin, save);								  // make it so that you can choose which index to move not which numbers
 		}while(true);
 
 	int saved = get_int(save);
@@ -140,8 +140,7 @@ int dice_out(int* dice_roll) {
 			saved_dice[i] = saved;
 
 	}
-
-	cout << *saved_dice << endl;
+	return *saved_dice;
 }
 
 /*Function: Scoring
@@ -151,7 +150,18 @@ Pre-conditions: dice need to be taken out in order to be added up
 Post-conditions: values need to be stored
 */
 
-// int scoring(int* dice_out)
+// int scoring(int* saved_dice, int length) {
+// 	int* score = 0;
+// 	for(int i = 0; i < length; i++) {
+// 		if(saved_dice[i] == 1)
+// 			*score = 100;
+// 		if(saved_dice[i] == 5)
+// 			*score = 50;
+// 	}
+
+// 	return *score;
+// }
+//core dump in this function
 
 /*Function: Scores
 Description: this gives the scores of each player at the end of a players turn
@@ -182,6 +192,11 @@ int main() {
 	roll(dice_roll, length);
 
 	dice_out(dice_roll);
+
+	// int scores;
+	// int * saved_dice = new int[length];
+	// scoring(saved_dice, length);
+	//core dump right here
 	
 	delete[] dice_roll;
 
