@@ -1,4 +1,5 @@
-
+#include <string>
+#include <cstdlib>
 #include <iostream>
 using namespace std;
 
@@ -46,6 +47,19 @@ int get_search_replace(char letter, string input, string &copy){
 	return count;
 }
 
+void mem(int** input) {
+	*input = new int;
+}
+
+void mem2(int*& input) {
+	input = new int;
+}
+
+int* mem3() {
+	return new int;
+}
+
+
 int main(){
 	string input, copy;
 	char letter;
@@ -58,4 +72,17 @@ int main(){
 	cin >> letter;
 	cout << get_search_replace(letter, input, copy) << endl;
 	cout << copy << endl;
+
+	int* input = mem3();
+	delete input;
+	input = NULL;
+
+	mem(&input);
+	delete input;
+	input = NULL;
+
+	mem2(input);
+	delete input;
+	input = NULL;
+
 }
