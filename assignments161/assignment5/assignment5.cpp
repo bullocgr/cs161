@@ -47,9 +47,6 @@ Pre-conditions: input must be an int
 Post-conditions: there is nothing to be output
 */
 
-//NEED TO ERROR HANDLE IN THIS
-//how do i store the player value as an int in the array
-//would I use the get_int function??
 int welcome(string* players) {
 	cout << "Welcome to farkle!! Enter how many players there are: ";
 	getline(cin, *players);
@@ -67,6 +64,22 @@ int welcome(string* players) {
 	return get_int(*players);
 }
 
+/*Function: is_int
+Description: checks if an int is between 1 and 6
+Parameters: take user input as a string
+Pre-conditions: input must be a string
+Post-conditions: must be inbetween 1-6 and output a bool
+*/
+
+bool is_int(string input) {
+	for(int i=0; i < input.length(); i++) {
+    if((input[i] > 48) && (input[i] < 55))
+      return true;
+    }
+
+    return false;
+
+}
 
 /*Function: roll
 Description: this gets the random variables that work as the dice roll
@@ -86,22 +99,6 @@ int roll(int* dice_roll, int length) {
 
 }
 
-/*Function: is_int
-Description: checks if an int is between 1 and 6
-Parameters: take user input as a string
-Pre-conditions: input must be a string
-Post-conditions: must be inbetween 1-6 and output a bool
-*/
-bool is_int(string input) {
-	for(int i=0; i < input.length(); i++) {
-    if((input[i] > 48) && (input[i] < 55))
-      return true;
-    }
-
-    return false;
-
-}
-
 /*Function: dice_out
 Description: this should allow the user to store the dice they don't want to reroll
 Parameters: look at the random rolls
@@ -109,7 +106,7 @@ Pre-conditions: dice must be random
 Post-conditions: this is used to find a score
 */
 
-int *dice_out(int* dice_roll, int* saved_dice) {
+void dice_out(int* dice_roll, int* saved_dice) {
 	string num, save;
 	cout << "Enter how many die you want to keep: ";
 	getline(cin, num);
@@ -136,9 +133,8 @@ int *dice_out(int* dice_roll, int* saved_dice) {
 		int saved = get_int(save); //convert what index they want to keep to an int
 		
 		saved_dice[i] = dice_roll[saved - 1];
-		// cout << saved_dice[i];
+		//cout << saved_dice[i];
 	}
-
 }
 
 /*Function: counter
@@ -151,28 +147,34 @@ Post-conditions: values need to be stored
 void counter(int* saved_dice, int* counter_arr, int length) {
 	length = 6;
 	counter_arr[6];
-	for(int i = 0; i < 6; i++) {
-		if(saved_dice[i] == 1) 
+	for(int i = 0; i < length; i++) {
+		if(saved_dice[i] == 1){ 
 			counter_arr[0]++;
+		}
 		
-		if(saved_dice[i] == 2)
+		if(saved_dice[i] == 2){
 			counter_arr[1]++;
+		}
 
-		if(saved_dice[i] == 3)
+		if(saved_dice[i] == 3){
 			counter_arr[2] ++;
+		}
 
-		if(saved_dice[i] == 4)
+		if(saved_dice[i] == 4){
 			counter_arr[3] ++;
+		}
 
-		if(saved_dice[i] == 5)
+		if(saved_dice[i] == 5){
 			counter_arr[4] ++;
+		}
 
-		if(saved_dice[i] == 6)
+		if(saved_dice[i] == 6){
 			counter_arr[5] ++;
-
-		//cout << counter_arr[i] << endl;
-
-	} //this loop needs to be able to count multiple ones and so on, right now it only counts one
+		}
+	}
+	// for(int i =0; i< length; i++){
+	// 	cout << counter_arr[i] << endl;
+	// }
 
 }
 
@@ -183,36 +185,63 @@ Pre-conditions: dice must have been rolled and turn must be over in order to run
 Post-conditions: values must be stored
 */
 
-int scoring(int* saved_dice, int* counter_arr, int length) {
+int scoring(int* counter_arr, int length) {
 	length = 6;
-	counter(saved_dice, counter_arr, length);
 	int current_score = 0;
-	for(int i = 0; i < length; i++) {
-		if(counter_arr[0] == 1)
+		if(counter_arr[0] == 1) {
 			current_score += 100;
-		if(counter_arr[0] == 3)
+		}
+
+		if(counter_arr[0] == 3) {
 			current_score += 300;
-		if(counter_arr[1] == 3)
+		}
+
+		if(counter_arr[1] == 3) {
 			current_score += 200;
-		if(counter_arr[2] == 3)
+		}
+
+		if(counter_arr[2] == 3) {
 			current_score += 300;
-		if(counter_arr[3] == 3)
+		}
+
+		if(counter_arr[3] == 3) {
 			current_score += 400;
-		if(counter_arr[4] == 1)
+		}
+
+		if(counter_arr[4] == 1) {
 			current_score += 50;
-		if(counter_arr[4] == 3)
+		}
+
+		if(counter_arr[4] == 3) {
 			current_score += 500;
-		if(counter_arr[5] == 3)
+		}
+
+		if(counter_arr[5] == 3) {
 			current_score += 300;
-	}
+		}
 
+		if(counter_arr[0] == 4 || counter_arr[1] == 4 || counter_arr[2] == 4 || counter_arr[3] == 4 || counter_arr[4] == 4 || counter_arr[5] == 4) {
+			current_score += 1000;
+		}
+
+		if(counter_arr[0] == 5 || counter_arr[1] == 5 || counter_arr[2] == 5 || counter_arr[3] == 5 || counter_arr[4] == 5 || counter_arr[5] == 5) {
+			current_score += 2000;
+		}
+
+		if(counter_arr[0] == 6 || counter_arr[1] == 6 || counter_arr[2] == 6 || counter_arr[3] == 6 || counter_arr[4] == 6 || counter_arr[5] == 6) {
+			current_score += 3000;
+		}
+
+		if(counter_arr[0] == 1 && counter_arr[1] == 1 && counter_arr[2] == 1 && counter_arr[3] == 1 && counter_arr[4] == 1 && counter_arr[5] == 1) {
+			current_score += 1500;
+		}
+
+		//three pairs should go here but it might be too much to code
+		//the last three scores are hard as fuckkkkk
+
+	cout << current_score << endl;
 	return current_score;
-
 }
-	//scores will come from another function
-	//this does not work lol
-
-
 
 int main() {
 	string players;
@@ -227,13 +256,11 @@ int main() {
 
 		int * saved_dice = new int[length];
 		dice_out(dice_roll, saved_dice);
-		// cout << *saved_dice << endl;
-		
+
 		int* counter_arr = new int[length];
 		counter(saved_dice, counter_arr, length);
-		//trying to see if the new array stores the values they wanted to store but i keep getting the memory address
 
-		cout << scoring(saved_dice, counter_arr, length) << endl;
+		scoring(counter_arr, length);
 		
 		//core dump right here
 	// }while(score != 10000)
