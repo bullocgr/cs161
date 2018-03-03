@@ -40,42 +40,6 @@ bool check_int(string num){
 
 }
 
-/*Function: Scoring
-Desription: this should add up all the points the player has
-Parameters: look at the dice they take out and add their scores
-Pre-conditions: dice need to be taken out in order to be added up
-Post-conditions: values need to be stored
-*/
-
-int counter(int* dice_roll, int length) {
-	int* one_counter = 0;
-	int* two_counter = 0;
-	int* three_counter = 0;
-	int* four_counter = 0;
-	int* five_counter = 0;
-	int* six_counter = 0;
-	for(int i = 0; i < length; i++) {
-		if(dice_roll[i] == 1) 
-			*one_counter ++;
-		
-		if(dice_roll[i] == 2)
-			*two_counter ++;
-
-		if(dice_roll[i] == 3)
-			*three_counter ++;
-
-		if(dice_roll[i] == 4)
-			*four_counter ++;
-
-		if(dice_roll[i] == 5)
-			*five_counter ++;
-
-		if(dice_roll[i] == 6)
-			*six_counter ++;
-	}
-}
-
-
 /*Function: welcome
 Descriptiom: this fuction decides how many players there will be
 Parameters: input must be an integer
@@ -145,46 +109,72 @@ Pre-conditions: dice must be random
 Post-conditions: this is used to find a score
 */
 
-// int *dice_out(int* dice_roll) {
-// 	string num, save;
-// 	int* saved_dice = dice_roll;
-// 	cout << "Enter how many dice you want to keep: ";
-// 	getline(cin, num);
-// 	do{
-// 		if(is_int(num) == true)
-// 			break;
-// 		cout << "Please input a number between 1 and 6: ";
-// 		getline(cin, num);
-// 		}while(true);
+int *dice_out(int* dice_roll, int* saved_dice) {
+	string num, save;
+	cout << "Enter how many die you want to keep: ";
+	getline(cin, num);
+	do{
+		if(is_int(num) == true)
+			break;
+		cout << "Please input a number between 1 and 6: ";
+		getline(cin, num);
+		}while(true);
 
-// 	int num_dice = get_int(num);
+	int num_dice = get_int(num); //convert how many die they want to keep to an int
 
-// 	for(int i = 0; i < num_dice; i++) {
-// 		cout << "Enter where the numbers are that you want to save: ";
-// 		getline(cin, save);
+	for(int i = 0; i < num_dice; i++) {
+		cout << "Enter what die number you want to save(hit enter after every number): ";
+		getline(cin, save);
 
-// 		do{
-// 		if(is_int(save) == true)
-// 			break;
-// 		cout << "Please input a number between 1 and 6: "; 
-// 		getline(cin, save);
-// 		}while(true);
+		do{
+		if(is_int(save) == true)
+			break;
+		cout << "Please input a number between 1 and 6: "; 
+		getline(cin, save);
+		}while(true);
 
-// 	// int saved = get_int(save);
+		int saved = get_int(save); //convert what index they want to keep to an int
+		
+		saved_dice[i] = dice_roll[saved - 1];
+		// cout << saved_dice[i];
+	}
 
-// 	// 		for(i = 0; i < num_dice; i++) {
-// 	// 			dice_roll[i-1] = saved_dice[i-1];
-// 	// 			cout << *saved_dice << endl; //ouputs the first value of the array
-// 	// 			// dice_roll[i-1] = NULL;
-// 	// 	}
+}
 
-// 	// }
+/*Function: counter
+Desription: this counts how many die they take out of what number
+Parameters: int* int and int
+Pre-conditions: dice need to be taken out in order to be added up
+Post-conditions: values need to be stored
+*/
 
-// //the code here should go through and save the indexes the user specifies
-// 	// who knows what the syntax is
+void counter(int* saved_dice, int* counter_arr, int length) {
+	length = 6;
+	counter_arr[6];
+	for(int i = 0; i < 6; i++) {
+		if(saved_dice[i] == 1) 
+			counter_arr[0]++;
+		
+		if(saved_dice[i] == 2)
+			counter_arr[1]++;
 
-// 	return saved_dice;
-// }
+		if(saved_dice[i] == 3)
+			counter_arr[2] ++;
+
+		if(saved_dice[i] == 4)
+			counter_arr[3] ++;
+
+		if(saved_dice[i] == 5)
+			counter_arr[4] ++;
+
+		if(saved_dice[i] == 6)
+			counter_arr[5] ++;
+
+		//cout << counter_arr[i] << endl;
+
+	} //this loop needs to be able to count multiple ones and so on, right now it only counts one
+
+}
 
 /*Function: Scores
 Description: this gives the scores of each player at the end of a players turn
@@ -193,37 +183,32 @@ Pre-conditions: dice must have been rolled and turn must be over in order to run
 Post-conditions: values must be stored
 */
 
-int scoring(int* counter, int length) {
-	*counter;
+int scoring(int* saved_dice, int* counter_arr, int length) {
 	length = 6;
-	int* score = 0;
-	int one_counter;
-	int two_counter;
-	int three_counter;
-	int four_counter;
-	int five_counter;
-	int six_counter;
+	counter(saved_dice, counter_arr, length);
+	int current_score = 0;
 	for(int i = 0; i < length; i++) {
-		if(one_counter == 1)
-			score += 100;
-		if(five_counter == 1)
-			score += 50;
-		if(two_counter == 3)
-			score += 200;
-		if(three_counter == 3)
-			score += 300;
-		if(four_counter == 3)
-			score += 400;
-		if(five_counter == 3)
-			score += 500;
-		if(six_counter == 3)
-			score += 600;
+		if(counter_arr[0] == 1)
+			current_score += 100;
+		if(counter_arr[0] == 3)
+			current_score += 300;
+		if(counter_arr[1] == 3)
+			current_score += 200;
+		if(counter_arr[2] == 3)
+			current_score += 300;
+		if(counter_arr[3] == 3)
+			current_score += 400;
+		if(counter_arr[4] == 1)
+			current_score += 50;
+		if(counter_arr[4] == 3)
+			current_score += 500;
+		if(counter_arr[5] == 3)
+			current_score += 300;
 	}
 
-	return *score;
-} //this is causing me a seg fault pls help
+	return current_score;
 
-// }
+}
 	//scores will come from another function
 	//this does not work lol
 
@@ -238,20 +223,24 @@ int main() {
 		int * dice_roll = new int[length];
 		cout << "Your numbers rolled are: " << endl;
 		roll(dice_roll, length);
-		counter(dice_roll, length);
+		// counter(dice_roll, length);
 
-		// dice_out(dice_roll);
-		// int * saved_dice = new int[length];
-		// cout << saved_dice << endl;
-		// //trying to see if the new array stores the values they wanted to store but i keep getting the memory address
+		int * saved_dice = new int[length];
+		dice_out(dice_roll, saved_dice);
+		// cout << *saved_dice << endl;
+		
+		int* counter_arr = new int[length];
+		counter(saved_dice, counter_arr, length);
+		//trying to see if the new array stores the values they wanted to store but i keep getting the memory address
 
-		cout << scoring(dice_roll, length) << endl;
+		cout << scoring(saved_dice, counter_arr, length) << endl;
 		
 		//core dump right here
 	// }while(score != 10000)
 	
 	delete[] dice_roll;
-	// delete[] saved_dice;
+	delete[] saved_dice;
+	delete[] counter_arr;
 
 	}
 	
