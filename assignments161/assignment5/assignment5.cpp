@@ -81,6 +81,22 @@ bool is_int(string input) {
 
 }
 
+/*Function: die_length
+Description: checks if a die is a valid die number
+Parameters: take user input and checks it
+Pre-conditions: input is a string
+Post-conditions: output is a bol
+*/
+
+bool die_length(string die_keep) {
+	for (int i = 0; i < die_keep.length(); i++) {
+		if ((die_keep[i] > 47) && (die_keep[i] < 55))
+			return true;
+	}
+
+	return false;
+}
+
 /*Function: roll
 Description: this gets the random variables that work as the dice roll
 Parameters: The rolls must be random
@@ -114,41 +130,86 @@ void dice_out(int* dice_roll, int* saved_dice) {
 	cout << "Enter how many die you want to keep: ";
 	getline(cin, num);
 	do {
-		if (is_int(num) == true)
+		if (die_length(num) == true)
 			break;
-		cout << "Please input a number between 1 and 6: ";
+		cout << "Please input a valid die amount: " << endl;
 		getline(cin, num);
 	} while (true);
 
 	int num_dice = get_int(num); //convert how many die they want to keep to an int
 
-	for (int i = 0; i < num_dice; i++) {
-		cout << "Enter what die number you want to save(hit enter after every number): ";
-		getline(cin, save);
-		do {
-			if (is_int(save) == true)
-				break;
-			cout << "Please input a number between 1 and 6: ";
+	if (num_dice > 0) {
+		for (int i = 0; i < num_dice; i++) {
+			cout << "Enter what die number you want to save(hit enter after every number): ";
 			getline(cin, save);
-		} while (true);
+			do {
+				if (is_int(save) == true)
+					break;
+				cout << "Please input a number between 1 and 6: ";
+				getline(cin, save);
+			} while (true);
 
-		int saved = get_int(save); //convert what index they want to keep to an int
+			int saved = get_int(save); //convert what index they want to keep to an int
 
-		saved_dice[i] = dice_roll[saved - 1];
-		dice_roll[saved - 1] = -1;
-
-		//cout << saved_dice[i];
+			saved_dice[i] = dice_roll[saved - 1];
+			dice_roll[saved - 1] = -1;
+		}
 	}
 }
 
-/*Function: counter
+/*Function: counter_original
+Description: this counts how many options they have at the beggining of each turn
+Parameters: take in the original array string
+Pre-conditions: need to pass in the original array
+Post-conditions: array counter must work to be used later on
+*/
+
+// void counter_original(int* dice_roll, int* counter_og, int length) {
+// 	length = 7;
+// 	counter_og[7];
+// 	for (int i = 0; i < length; i++) {
+// 		if (dice_roll[i] == 1) {
+// 			counter_og[0]++;
+// 		}
+
+// 		if (dice_roll[i] == 2) {
+// 			counter_og[1]++;
+// 		}
+
+// 		if (dice_roll[i] == 3) {
+// 			counter_og[2] ++;
+// 		}
+
+// 		if (dice_roll[i] == 4) {
+// 			counter_og[3] ++;
+// 		}
+
+// 		if (dice_roll[i] == 5) {
+// 			counter_og[4] ++;
+// 		}
+
+// 		if (dice_roll[i] == 6) {
+// 			counter_og[5] ++;
+// 		}
+
+// 		if (dice_roll[i] == -1) {
+// 			counter_og[7] ++;
+// 		}
+// 	}
+// 	// for(int i =0; i< length; i++){
+// 	// 	cout << counter_og[i] << endl;
+// 	//}
+
+// }
+
+/*Function: counter_saved
 Desription: this counts how many die they take out of what number
 Parameters: int* int and int
 Pre-conditions: dice need to be taken out in order to be added up
 Post-conditions: values need to be stored
 */
 
-void counter(int* saved_dice, int* counter_arr, int length) {
+void counter_saved(int* saved_dice, int* counter_arr, int length) {
 	length = 7;
 	counter_arr[7];
 	for (int i = 0; i < length; i++) {
@@ -186,6 +247,67 @@ void counter(int* saved_dice, int* counter_arr, int length) {
 
 }
 
+// int farkle(int* counter_og, int length) {
+// 	if (counter_og[0] == 1) {
+// 		return 1;
+// 	}
+
+// 	if (counter_og[0] == 3) {
+// 		return 1;
+// 	}
+
+// 	if (counter_og[1] == 3) {
+// 		return 1;
+// 	}
+
+// 	if (counter_og[2] == 3) {
+// 		return 1;
+// 	}
+
+// 	if (counter_og[3] == 3) {
+// 		return 1;
+// 	}
+
+// 	if (counter_og[4] == 1) {
+// 		return 1;
+// 	}
+
+// 	if (counter_og[4] == 3) {
+// 		return 1;
+// 	}
+
+// 	if (counter_og[5] == 3) {
+// 		return 1;
+// 	}
+
+// 	if (counter_og[0] == 4 || counter_og[1] == 4 || counter_og[2] == 4 || counter_og[3] == 4 || counter_og[4] == 4 || counter_og[5] == 4) {
+// 		return 1;
+// 	}
+
+// 	if (counter_og[0] == 5 || counter_og[1] == 5 || counter_og[2] == 5 || counter_og[3] == 5 || counter_og[4] == 5 || counter_og[5] == 5) {
+// 		return 1;
+// 	}
+
+// 	if (counter_og[0] == 6 || counter_og[1] == 6 || counter_og[2] == 6 || counter_og[3] == 6 || counter_og[4] == 6 || counter_og[5] == 6) {
+// 		return 1;
+// 	}
+
+// 	if (counter_og[0] == 1 && counter_og[1] == 1 && counter_og[2] == 1 && counter_og[3] == 1 && counter_og[4] == 1 && counter_og[5] == 1) {
+// 		return 1;
+// 	}
+
+// 	if (counter_og[7] != 0 || counter_og[7] == 0) {
+// 		return 1;
+// 	}
+
+// 	else {
+// 		cout << "FARKLE" << endl;
+// 	}
+// }
+
+//three pairs should go here but it might be too much to code
+//the last three scores are hard as fuckkkkk
+
 /*Function: Scoring
 Description: this gives the scores of each player at the end of a players turn
 Parameters: looks at two pointers
@@ -194,6 +316,11 @@ Post-conditions: values must be stored
 */
 
 int scoring(int* counter_arr, int length) {
+	for(int i =0; i<length; i++){
+		cout << "counter_arr " << i << " is : " << counter_arr[i] << endl;
+	}
+
+
 	length = 6;
 	int current_score = 0;
 	if (counter_arr[0] == 1) {
@@ -248,6 +375,9 @@ int scoring(int* counter_arr, int length) {
 		current_score += 0;
 	}
 
+	else
+		cout << "FARKLE" << endl;
+
 	//three pairs should go here but it might be too much to code
 	//the last three scores are hard as fuckkkkk
 
@@ -255,37 +385,71 @@ int scoring(int* counter_arr, int length) {
 	return current_score;
 }
 
+/*Function: final_score
+Description: shows the finals score of each player
+Parameters:
+*/
+
+int final_score(int players, int* scoreboard) {
+	for (int i = 0; i < players; i++) {
+		cout << "Player " << i + 1 << ":";
+		cout << (scoreboard)[i] << endl;
+	}
+}
+
+void resetArr(int*array, int length){
+	for(int i =0; i<length; i++){
+		array[i]=0;
+	}
+}
+
 int main() {
 	string players;
-	welcome(&players);
+	int num_players = welcome(&players);
 	char input;
 	int length = 6;
 	int * saved_dice = new int[length];
 	int* counter_arr = new int[length];
 	int * dice_roll = new int[length];
+	int * counter_og = new int[length];
+	int *scoreboard = new int[num_players];
+	resetArr(scoreboard, num_players);
+	int intitial_score = 0;
 
-	do {
-		cout << "Your numbers rolled are: " << endl;
-		roll(dice_roll, length);
-		// counter(dice_roll, length);
+	for (int i = 0; i < num_players; i++) {
+		int tempScore = 0;
+		do {
+			cout << "Your numbers rolled are: " << endl;
+			roll(dice_roll, length);
 
+			// counter_original(dice_roll, counter_og, length); //i don't think it can read in when it equals -1
+			// farkle(counter_og, length);
 
-		dice_out(dice_roll, saved_dice);
+			dice_out(dice_roll, saved_dice);
+			counter_saved(saved_dice, counter_arr, length);
 
+			//tempScore += scoring(counter_arr, length);
+			//cout << "called scoring \n";
 
-		counter(saved_dice, counter_arr, length);
+			// final_score(&players, *current_score, scoreboard, &intitial_score);
 
-		scoring(counter_arr, length);
+			cout << "Continue your turn? (y/n): ";
+			cin >> input;
+		} while (input == 'y');
 
-		cout << "Continue your turn? (y/n): ";
-		cin >> input;
-	} while (input = 'y');
+		tempScore += scoring(counter_arr, length);
+		cout << "called scoring \n";
 
-	// }while(score != 10000)
+		scoreboard[i] += tempScore;
+		final_score(num_players, scoreboard);
+		resetArr(counter_arr, 6);
+		resetArr(dice_roll, length);
+	}
 
 	delete[] dice_roll;
 	delete[] saved_dice;
 	delete[] counter_arr;
+	delete[] counter_og;
 
 } //still need to get the farkle working and the final scoreboard working
 
